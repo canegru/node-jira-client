@@ -710,6 +710,23 @@ export default class JiraApi {
     }));
   }
 
+  /** Add issue to Jira in bulk
+   * [Jira Doc](https://developer.atlassian.com/cloud/jira/platform/rest/v2/#api-rest-api-2-issue-bulk-post)
+   * @name addNewIssueBulk
+   * @function
+   * @param {object} issues - Properly Formatted object containing issueUpdates
+   * @param {array}  issues.issueUpdates - Properly Formatted Issue object Array
+   */
+  addNewIssueBulk(issues) {
+    return this.doRequest(this.makeRequestHeader(this.makeUri({
+      pathname: '/issue/bulk',
+    }), {
+      method: 'POST',
+      followAllRedirects: true,
+      body: issues,
+    }));
+  }
+
   /** Add a user as a watcher on an issue
    * @name addWatcher
    * @function
@@ -748,10 +765,11 @@ export default class JiraApi {
    * @name deleteIssue
    * @function
    * @param {string} issueId - the Id of the issue to delete
+   * @param {bool} deleteSubtasks - delete all sub-tasks assigned to an issue
    */
-  deleteIssue(issueId) {
+  deleteIssue(issueId,deleteSubtasks = false) {
     return this.doRequest(this.makeRequestHeader(this.makeUri({
-      pathname: `/issue/${issueId}`,
+      pathname: `/issue/${issueId}?deleteSubtasks=${deleteSubtasks}`,
     }), {
       method: 'DELETE',
       followAllRedirects: true,
