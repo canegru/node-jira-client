@@ -32,7 +32,7 @@
   },
   "scripts": {
     "prepare": "npm run build",
-    "build": "rm -rf lib && babel src --out-dir lib",
+    "build": "babel src --out-dir lib",
     "docs-build": "rm -rf docs && esdoc -c esdoc.json",
     "lint": "eslint ./",
     "test": "npm run lint && mocha && npm run docs-build",
