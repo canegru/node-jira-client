@@ -31,6 +31,7 @@
     "request-promise": "^4.1.1"
   },
   "scripts": {
+    "prepare": "npm run build",
     "build": "rm -rf lib && babel src --out-dir lib",
     "docs-build": "rm -rf docs && esdoc -c esdoc.json",
     "lint": "eslint ./",
